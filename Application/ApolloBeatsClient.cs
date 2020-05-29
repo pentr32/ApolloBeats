@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Victoria;
 using DataLayer.Entities;
 using ServiceLayer.Services;
+using ServiceLayer;
 
 namespace Application
 {
@@ -46,6 +47,9 @@ namespace Application
 
             _client.Log += LogAsync;
             _services = SetupServices();
+
+            var cmdHandler = new CommandHandler(_client, _cmdService, _services);
+            await cmdHandler.InitializeAsync();
 
             await _services.GetRequiredService<MusicService>().InitializeAsync();
             await Task.Delay(-1);
