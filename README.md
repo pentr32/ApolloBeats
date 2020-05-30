@@ -1,8 +1,7 @@
 # ApolloBeats
 
-<p align="center">
-  [![music-player-victoria](https://img.shields.io/badge/Music%20player-Victoria-blueviolet)](https://github.com/Yucked/Victoria)
-  </p>
+![MyGet (with prereleases)](https://img.shields.io/myget/discord-net/vpre/discord.net) ![Nuget](https://img.shields.io/nuget/v/discord.net) [![Made with victoria](https://img.shields.io/badge/Music%20player-Victoria-blueviolet)](https://github.com/Yucked/Victoria) [![GitHub issues](https://img.shields.io/github/issues/pentr32/ApolloBeats)](https://github.com/pentr32/ApolloBeats/issues) 
+
 
 **ApolloBeats** is a simple discord bot written in **C# .NET Core**. The bot can execute simple commands and play music by using **Victoria**. This is just an example of how you can build your own Discord Bot so feel free to clone my project, test it, edit it how you want. Feel free to share and don't forget to give me a star! :D
 
