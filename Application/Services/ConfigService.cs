@@ -2,7 +2,7 @@
 using DataLayer.Entities;
 using System.IO;
 
-namespace ServiceLayer.Services
+namespace Application.Services
 {
     public class ConfigService
     {

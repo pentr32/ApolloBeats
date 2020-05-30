@@ -3,16 +3,18 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ServiceLayer.Services
+namespace Application.Services
 {
     public class LogService
     {
+        #region Dependency Injection
         private readonly SemaphoreSlim _semaphoreSlim;
 
         public LogService()
         {
             _semaphoreSlim = new SemaphoreSlim(1);
         }
+        #endregion Dependency Injection
 
         public async Task LogAsync(LogMessage arg)
         {

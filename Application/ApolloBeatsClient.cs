@@ -6,13 +6,13 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using Victoria;
 using DataLayer.Entities;
-using ServiceLayer.Services;
-using ServiceLayer;
+using Application.Services;
 
 namespace Application
 {
     public class ApolloBeatsClient
     {
+        #region Dependency Injection
         private readonly DiscordSocketClient _client;
         private readonly CommandService _cmdService;
         private IServiceProvider _services;
@@ -39,7 +39,9 @@ namespace Application
             _configService = new ConfigService();
             _config = _configService.GetConfig();
         }
+        #endregion Dependency Injection
 
+        // Method that intialize the the properties from 'Dependency Injection' region by help from methods _client and _services.
         public async Task InitializeAsync()
         {
             await _client.LoginAsync(TokenType.Bot, _config.Token);
@@ -48,18 +50,20 @@ namespace Application
             _client.Log += LogAsync;
             _services = SetupServices();
 
-            var cmdHandler = new CommandHandler(_client, _cmdService, _services);
+            var cmdHandler = new CommandHandler(_client, _cmdService, _services, _configService, _config);
             await cmdHandler.InitializeAsync();
 
             await _services.GetRequiredService<MusicService>().InitializeAsync();
             await Task.Delay(-1);
         }
 
+        // Method that adds log messages to logs from DataLayer.Logs folder.
         private async Task LogAsync(LogMessage logMessage)
         {
             await _logService.LogAsync(logMessage);
         }
 
+        // Method that setup all the services from Application.Services and classes from LavaLink
         private IServiceProvider SetupServices()
             => new ServiceCollection()
             .AddSingleton(_client)
@@ -67,6 +71,7 @@ namespace Application
             .AddSingleton(_logService)
             .AddSingleton<LavaRestClient>()
             .AddSingleton<LavaSocketClient>()
+            .AddSingleton<MusicService>()
             .BuildServiceProvider();
     }
 }

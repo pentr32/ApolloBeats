@@ -5,21 +5,28 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Discord;
 using DataLayer.Entities;
+using Application.Services;
 
-namespace ServiceLayer
+namespace Application
 {
     public class CommandHandler
     {
+        #region Dependency Injection
         private readonly DiscordSocketClient _client;
         private readonly CommandService _cmdService;
         private readonly IServiceProvider _services;
+        private readonly ConfigService _configService;
+        private readonly Config _config;
 
-        public CommandHandler(DiscordSocketClient client, CommandService cmdService, IServiceProvider services)
+        public CommandHandler(DiscordSocketClient client, CommandService cmdService, IServiceProvider services, ConfigService configService, Config config)
         {
             _client = client;
             _cmdService = cmdService;
             _services = services;
+            _configService = configService;
+            _config = config;
         }
+        #endregion Dependency Injection
 
         public async Task InitializeAsync()
         {
@@ -38,7 +45,7 @@ namespace ServiceLayer
             if (userMessage is null)
                 return;
 
-            if (!userMessage.HasStringPrefix("!", ref argPos))
+            if (!userMessage.HasStringPrefix(_config.Prefix, ref argPos))
                 return;
 
             var context = new SocketCommandContext(_client, userMessage);
