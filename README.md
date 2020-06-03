@@ -10,11 +10,11 @@
 
 Before you get going, you will need these things:
 > Updated project is located on **Development** branch.
-
+>
 > Latest java runtime version. It can be found on their website.
-
+>
 > Music player: **Library** ([Victoria](https://github.com/Yucked/Victoria)) |  **Documentation** ([Victoria wiki](https://github.com/Yucked/Victoria/wiki))
-
+>
 > Discord .NET: **Library** ([Discord .NET](https://github.com/discord-net/Discord.Net))
 
 ## Setup
